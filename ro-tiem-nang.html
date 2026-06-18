@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — rổ tiềm năng</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--accent:#6fae9f;--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:480px;margin:0 auto;padding:22px 16px 48px}
+
+.head{display:flex;align-items:center;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.logo{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:13px}
+.head .b{font-weight:600;font-size:17px}
+.silver{font-size:10.5px;font-weight:700;color:#10211d;background:var(--accent);padding:2px 8px;border-radius:999px}
+.lede{color:var(--muted);font-size:14px;margin:2px 0 16px}
+
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:13px;color:#dcdcdc;margin-bottom:16px}
+.summary b{color:var(--text)}
+
+.filter{display:flex;gap:6px;overflow-x:auto;margin-bottom:14px;padding-bottom:2px}
+.filter button{white-space:nowrap;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;cursor:pointer;transition:all .15s}
+.filter button.on{border-color:var(--accent);color:var(--text);background:rgba(111,174,159,.08)}
+
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.row{padding:13px 16px;border-top:1px solid var(--line);display:flex;align-items:center;gap:12px}
+.row:first-child{border-top:none}
+.tkwrap{min-width:84px}
+.tk{font-weight:700;font-size:15.5px}
+.sect{font-size:11.5px;color:var(--muted-2);margin-top:1px}
+.mid{flex:1}
+.tag{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid;letter-spacing:.02em}
+.tag.acc{color:var(--accent);border-color:rgba(111,174,159,.45);background:rgba(111,174,159,.08)}
+.tag.flow{color:var(--green);border-color:rgba(92,189,134,.45);background:rgba(92,189,134,.08)}
+.tag.brk{color:var(--amber);border-color:rgba(227,168,58,.45);background:rgba(227,168,58,.08)}
+.note{font-size:12px;color:var(--muted);margin-top:5px}
+.score{text-align:right;min-width:42px}
+.score .n{font-weight:700;font-size:15px;color:var(--accent)}
+.score .l{font-size:9.5px;color:var(--muted-2);letter-spacing:.04em}
+
+.disc{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:12.5px;color:var(--muted);margin-top:16px;line-height:1.5}
+.disc b{color:var(--text)}
+.back{text-align:center;font-size:13px;margin-top:16px}
+.back a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="head"><span class="logo">◉</span><span class="b">Rổ 20 mã tiềm năng</span><span class="silver">SILVER</span></div>
+  <p class="lede">20 mã lọc từ các ngành đang hút tiền + tín hiệu tích lũy · cập nhật hôm nay.</p>
+
+  <div class="summary">
+    Lọc tự động từ ~700 mã sàn HOSE/HNX, ưu tiên ngành đang mạnh (Ngân hàng, Chứng khoán, Thép). <b>Đây là danh sách để bạn xem xét — không phải lệnh mua.</b>
+  </div>
+
+  <div class="filter">
+    <button class="on" onclick="flt('all',this)">Tất cả</button>
+    <button onclick="flt('acc',this)">Đang tích lũy</button>
+    <button onclick="flt('flow',this)">Dòng tiền vào</button>
+    <button onclick="flt('brk',this)">Vừa vượt nền</button>
+  </div>
+
+  <div class="list" id="list">
+    <!-- rows -->
+    <div class="row" data-k="flow"><div class="tkwrap"><div class="tk">VCB</div><div class="sect">Ngân hàng</div></div><div class="mid"><span class="tag flow">Dòng tiền vào</span><div class="note">Khối ngoại mua ròng 6 phiên liên tiếp.</div></div><div class="score"><div class="n">8.7</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">CTG</div><div class="sect">Ngân hàng</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Nền chặt 3 tuần, biến động thấp dần.</div></div><div class="score"><div class="n">8.4</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="flow"><div class="tkwrap"><div class="tk">SSI</div><div class="sect">Chứng khoán</div></div><div class="mid"><span class="tag flow">Dòng tiền vào</span><div class="note">Thanh khoản tăng, dòng tiền chủ động vào.</div></div><div class="score"><div class="n">8.3</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="brk"><div class="tkwrap"><div class="tk">VCI</div><div class="sect">Chứng khoán</div></div><div class="mid"><span class="tag brk">Vừa vượt nền</span><div class="note">Vượt vùng tích lũy với khối lượng lớn.</div></div><div class="score"><div class="n">8.1</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">MBB</div><div class="sect">Ngân hàng</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Giữ vùng hỗ trợ, dòng tiền không rút.</div></div><div class="score"><div class="n">7.9</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="flow"><div class="tkwrap"><div class="tk">HSG</div><div class="sect">Thép</div></div><div class="mid"><span class="tag flow">Dòng tiền vào</span><div class="note">Ngành thép hút tiền, HSG dẫn dắt.</div></div><div class="score"><div class="n">7.8</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="brk"><div class="tkwrap"><div class="tk">NKG</div><div class="sect">Thép</div></div><div class="mid"><span class="tag brk">Vừa vượt nền</span><div class="note">Phá vùng kháng cự ngắn hạn.</div></div><div class="score"><div class="n">7.6</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">KBC</div><div class="sect">BĐS KCN</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Nền giá ổn định, chờ tín hiệu vào tiền.</div></div><div class="score"><div class="n">7.5</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="flow"><div class="tkwrap"><div class="tk">FPT</div><div class="sect">Công nghệ</div></div><div class="mid"><span class="tag flow">Dòng tiền vào</span><div class="note">Dòng tiền lớn duy trì, xu hướng tăng bền.</div></div><div class="score"><div class="n">7.4</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">IDC</div><div class="sect">BĐS KCN</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Tích lũy chặt sau nhịp tăng.</div></div><div class="score"><div class="n">7.2</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="brk"><div class="tkwrap"><div class="tk">DGC</div><div class="sect">Hóa chất</div></div><div class="mid"><span class="tag brk">Vừa vượt nền</span><div class="note">Vượt nền sau giai đoạn đi ngang dài.</div></div><div class="score"><div class="n">7.1</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="flow"><div class="tkwrap"><div class="tk">REE</div><div class="sect">Đa ngành</div></div><div class="mid"><span class="tag flow">Dòng tiền vào</span><div class="note">Dòng tiền vào ổn định, ít biến động.</div></div><div class="score"><div class="n">6.9</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">SZC</div><div class="sect">BĐS KCN</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Vùng nền hẹp, chờ break.</div></div><div class="score"><div class="n">6.8</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="brk"><div class="tkwrap"><div class="tk">PNJ</div><div class="sect">Bán lẻ</div></div><div class="mid"><span class="tag brk">Vừa vượt nền</span><div class="note">Hồi phục, vượt MA quan trọng.</div></div><div class="score"><div class="n">6.6</div><div class="l">ĐIỂM</div></div></div>
+    <div class="row" data-k="acc"><div class="tkwrap"><div class="tk">HDB</div><div class="sect">Ngân hàng</div></div><div class="mid"><span class="tag acc">Đang tích lũy</span><div class="note">Nền ổn định, theo nhịp ngành ngân hàng.</div></div><div class="score"><div class="n">6.5</div><div class="l">ĐIỂM</div></div></div>
+  </div>
+  <p class="note" style="text-align:center;margin-top:12px">Hiển thị 15/20 mã · nâng cấp để xem đầy đủ &amp; lý do chi tiết từng mã</p>
+
+  <div class="disc">
+    ⚠ <b>Lưu ý:</b> đây là danh sách <b>ứng viên để bạn nghiên cứu thêm</b>, không phải khuyến nghị mua/bán. "Điểm" là kết quả lọc nội bộ, không đảm bảo lợi nhuận. Quyết định đầu tư là của bạn. <span style="color:var(--muted-2)">(Số liệu trong demo là minh hoạ.)</span>
+  </div>
+
+  <div class="back"><a href="nganh.html">‹ Về ngành hút tiền</a> · <a href="radar.html">Màn hình Radar</a></div>
+</div>
+
+<script>
+  function flt(k,btn){
+    document.querySelectorAll('.filter button').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    document.querySelectorAll('.row').forEach(function(e){
+      e.style.display=(k==='all'||k===e.getAttribute('data-k'))?'flex':'none';
+    });
+  }
+</script>
+</body>
+</html>

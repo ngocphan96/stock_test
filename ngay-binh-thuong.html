@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — hôm nay</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--gray:#6a6a70;--accent:#6fae9f;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:440px;margin:0 auto;padding:20px 16px 48px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 30px 60px -34px rgba(0,0,0,.7)}
+
+.hd{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 14px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:17px}
+.logo{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:13px}
+.time{color:var(--muted-2);font-size:13px;white-space:nowrap}
+
+/* calm banner */
+.calm{background:rgba(92,189,134,.07);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px;display:flex;gap:12px;align-items:flex-start}
+.calm .dot{width:9px;height:9px;border-radius:50%;background:var(--green);margin-top:6px;flex:none}
+.calm h3{color:var(--green);font-size:16px;font-weight:600}
+.calm p{color:var(--muted);font-size:13.5px;margin-top:2px}
+
+/* checked summary */
+.checked{padding:16px 18px;border-bottom:1px solid var(--line)}
+.checked .lbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin-bottom:11px}
+.ck{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:13.5px;color:#cfcfcf}
+.ck .c{color:var(--green);flex:none;font-weight:700}
+.ck b{color:var(--text)}
+
+/* holdings */
+.held{color:var(--muted);font-size:13px;padding:14px 18px 4px}
+.row{display:flex;align-items:center;gap:11px;padding:11px 18px;border-top:1px solid var(--line)}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.dot.green{background:var(--green)}.dot.gray{background:var(--gray)}
+.tk{font-weight:700;font-size:15px}
+.sp{flex:1}
+.tag{font-size:11px;color:var(--muted-2)}
+.tag.hold{color:var(--green);border:1px solid rgba(92,189,134,.45);background:rgba(92,189,134,.08);font-weight:600;padding:2px 9px;border-radius:999px;font-size:10.5px}
+
+/* footer last alert */
+.last{margin:16px 14px 6px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;display:flex;align-items:center;gap:10px}
+.last .txt{font-size:13px;color:var(--muted)}
+.last .txt b{color:var(--text)}
+.last a{margin-left:auto;color:var(--accent);font-size:13px;font-weight:600;white-space:nowrap}
+.signoff{text-align:center;color:var(--muted-2);font-size:13px;padding:12px 18px 18px}
+
+.back{text-align:center;font-size:13px;margin-top:22px}
+.back a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="card">
+    <div class="hd">
+      <div class="brand"><span class="logo">◉</span> Radar danh mục</div>
+      <div class="time" id="now">—</div>
+    </div>
+
+    <div class="calm">
+      <span class="dot"></span>
+      <div>
+        <h3>Danh mục ổn định</h3>
+        <p>Không có gì cần làm hôm nay.</p>
+      </div>
+    </div>
+
+    <div class="checked">
+      <div class="lbl">Radar đã canh giúp bạn</div>
+      <div class="ck"><span class="c">✓</span><span>Đã quét <b>7 mã</b> lúc 7:30 sáng</span></div>
+      <div class="ck"><span class="c">✓</span><span>Dòng tiền: <b>không mã nào bị rút bất thường</b></span></div>
+      <div class="ck"><span class="c">✓</span><span>Tin tức: <b>không có mã nào bị đẩy tin</b></span></div>
+    </div>
+
+    <div class="held">7 mã đang giữ · tất cả bình thường</div>
+    <div class="row"><span class="dot green"></span><span class="tk">NLG</span><span class="sp"></span><span class="tag hold">GIỮ</span></div>
+    <div class="row"><span class="dot green"></span><span class="tk">VND</span><span class="sp"></span><span class="tag hold">GIỮ</span></div>
+    <div class="row"><span class="dot gray"></span><span class="tk">SSI</span><span class="sp"></span><span class="tag">bình thường</span></div>
+    <div class="row"><span class="dot gray"></span><span class="tk">DXG</span><span class="sp"></span><span class="tag">bình thường</span></div>
+    <div class="row"><span class="dot gray"></span><span class="tk">PDR</span><span class="sp"></span><span class="tag">bình thường</span></div>
+    <div class="row"><span class="dot gray"></span><span class="tk">HPG</span><span class="sp"></span><span class="tag">bình thường</span></div>
+    <div class="row"><span class="dot gray"></span><span class="tk">DIG</span><span class="sp"></span><span class="tag">bình thường</span></div>
+
+    <div class="last">
+      <div class="txt">Cảnh báo gần nhất: <b>DIG</b> · 6 ngày trước</div>
+      <a href="track-record.html">Lịch sử →</a>
+    </div>
+    <div class="signoff">Radar vẫn canh mỗi sáng. Có gì đáng chú ý sẽ báo ngay — hẹn gặp sáng mai.</div>
+  </div>
+
+  <div class="back"><a href="radar.html">‹ Xem ngày có cảnh báo</a></div>
+</div>
+
+<script>
+  function tick(){
+    var d=new Date();var p=function(n){return String(n).padStart(2,'0')};
+    document.getElementById('now').textContent=p(d.getHours())+':'+p(d.getMinutes())+' · '+p(d.getDate())+'/'+p(d.getMonth()+1);
+  }
+  tick(); setInterval(tick,30000);
+</script>
+</body>
+</html>

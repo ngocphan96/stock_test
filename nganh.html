@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — ngành hút tiền</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--gray:#6a6a70;--accent:#6fae9f;--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:480px;margin:0 auto;padding:22px 16px 48px}
+
+.head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.logo{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:13px}
+.head .b{font-weight:600;font-size:17px}
+.silver{font-size:10.5px;font-weight:700;color:#10211d;background:var(--accent);padding:2px 8px;border-radius:999px;margin-left:6px}
+.lede{color:var(--muted);font-size:14px;margin:2px 0 16px}
+
+.summary{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;font-size:13.5px;color:#dcdcdc;margin-bottom:18px}
+.summary b.in{color:var(--green)} .summary b.out{color:var(--red)}
+
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.row{padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:none}
+.row .top{display:flex;align-items:center;gap:10px}
+.sect{font-weight:700;font-size:15px}
+.sp{flex:1}
+.fbadge{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid;letter-spacing:.02em}
+.fbadge.in2{color:var(--green);border-color:rgba(92,189,134,.5);background:rgba(92,189,134,.10)}
+.fbadge.in1{color:var(--green);border-color:rgba(92,189,134,.4);background:rgba(92,189,134,.05)}
+.fbadge.flat{color:var(--muted-2);border-color:var(--line)}
+.fbadge.out{color:var(--red);border-color:rgba(240,106,111,.5);background:rgba(240,106,111,.08)}
+
+.track{height:6px;background:var(--surface-2);border-radius:999px;margin:10px 0 0;overflow:hidden}
+.fill{height:100%;border-radius:999px}
+.fill.g{background:var(--green)} .fill.r{background:var(--red)} .fill.x{background:var(--gray)}
+.lead{color:var(--muted);font-size:12.5px;margin-top:8px}
+.lead b{color:#cfcfcf;font-weight:600}
+
+.cta{display:block;width:100%;margin-top:18px;padding:14px;border:1px solid rgba(111,174,159,.4);border-radius:13px;text-align:center;color:var(--accent);font-weight:600;font-size:14px;background:rgba(111,174,159,.05)}
+.cta:hover{background:rgba(111,174,159,.1)}
+.note{color:var(--muted-2);font-size:12px;margin-top:14px;text-align:center}
+.back{text-align:center;font-size:13px;margin-top:16px}
+.back a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="head"><span class="logo">◉</span><span class="b">Ngành đang hút tiền</span><span class="silver">SILVER</span></div>
+  <p class="lede">Dòng tiền tuần này đang dồn về đâu, rút khỏi đâu — cập nhật mỗi sáng.</p>
+
+  <div class="summary">
+    Tuần này dòng tiền đổ vào <b class="in">Ngân hàng &amp; Chứng khoán</b>, rút khỏi <b class="out">BĐS dân cư</b>. Đây là lý do các mã BĐS như DIG, PDR đang yếu.
+  </div>
+
+  <div class="list">
+    <div class="row">
+      <div class="top"><span class="sect">Ngân hàng</span><span class="sp"></span><span class="fbadge in2">↑ vào mạnh</span></div>
+      <div class="track"><div class="fill g" style="width:88%"></div></div>
+      <div class="lead">Dẫn dắt: <b>VCB · TCB · MBB</b> · 12/16 mã có dòng tiền vào</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">Chứng khoán</span><span class="sp"></span><span class="fbadge in2">↑ vào mạnh</span></div>
+      <div class="track"><div class="fill g" style="width:72%"></div></div>
+      <div class="lead">Dẫn dắt: <b>SSI · VND · HCM</b> · 8/10 mã có dòng tiền vào</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">Thép</span><span class="sp"></span><span class="fbadge in1">↑ vào</span></div>
+      <div class="track"><div class="fill g" style="width:54%"></div></div>
+      <div class="lead">Dẫn dắt: <b>HSG · NKG</b> · lưu ý: HPG riêng lẻ đang yếu</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">BĐS Khu công nghiệp</span><span class="sp"></span><span class="fbadge in1">↑ vào nhẹ</span></div>
+      <div class="track"><div class="fill g" style="width:38%"></div></div>
+      <div class="lead">Dẫn dắt: <b>KBC · IDC</b> · 5/9 mã có dòng tiền vào</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">Bán lẻ</span><span class="sp"></span><span class="fbadge flat">→ đi ngang</span></div>
+      <div class="track"><div class="fill x" style="width:16%"></div></div>
+      <div class="lead">MWG · FRT · dòng tiền cân bằng</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">Dầu khí</span><span class="sp"></span><span class="fbadge flat">→ đi ngang</span></div>
+      <div class="track"><div class="fill x" style="width:12%"></div></div>
+      <div class="lead">GAS · PVD · chưa có xu hướng rõ</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">Điện</span><span class="sp"></span><span class="fbadge out">↓ đang ra</span></div>
+      <div class="track"><div class="fill r" style="width:30%"></div></div>
+      <div class="lead">POW · NT2 · dòng tiền rút nhẹ</div>
+    </div>
+
+    <div class="row">
+      <div class="top"><span class="sect">BĐS dân cư</span><span class="sp"></span><span class="fbadge out">↓ rút mạnh</span></div>
+      <div class="track"><div class="fill r" style="width:62%"></div></div>
+      <div class="lead">Dẫn dắt giảm: <b>DIG · DXG · PDR</b> · 7/9 mã bị rút</div>
+    </div>
+  </div>
+
+  <a class="cta" href="ro-tiem-nang.html">Xem rổ 20 mã tiềm năng từ các ngành đang mạnh →</a>
+  <p class="note">Tính năng gói Silver · số liệu trong demo là minh hoạ.</p>
+  <div class="back"><a href="radar.html">‹ Về màn hình Radar</a></div>
+</div>
+</body>
+</html>

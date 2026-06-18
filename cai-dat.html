@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — cài đặt</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--accent:#6fae9f;--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:460px;margin:0 auto;padding:22px 16px 48px}
+
+.head{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.logo{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:13px}
+.head .b{font-weight:600;font-size:17px}
+
+.glabel{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin:22px 4px 10px}
+.group{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:14px 16px;border-top:1px solid var(--line);min-height:54px}
+.row:first-child{border-top:none}
+.row .k{font-size:14px}
+.row .kd{font-size:12px;color:var(--muted-2);margin-top:2px}
+.row .sp{flex:1}
+.row .val{color:var(--muted);font-size:13.5px}
+.row .chev{color:var(--muted-2);font-size:18px}
+.row a.full{display:flex;align-items:center;gap:12px;flex:1;color:inherit}
+.tier-pill{font-size:10.5px;font-weight:700;color:#10211d;background:var(--accent);padding:2px 8px;border-radius:999px;margin-left:6px}
+.lock{font-size:10.5px;color:var(--muted-2);border:1px solid var(--line);padding:2px 7px;border-radius:999px}
+
+/* plan card */
+.plan{background:linear-gradient(180deg,rgba(111,174,159,.08),transparent),var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.plan .n{font-size:16px;font-weight:700}
+.plan .meta{color:var(--muted);font-size:13px;margin-top:3px}
+.plan .up{display:inline-block;margin-top:14px;padding:9px 16px;background:var(--accent);color:#10211d;font-weight:600;font-size:13.5px;border-radius:10px}
+.plan .up:hover{filter:brightness(1.07)}
+
+/* toggle */
+.tg{width:42px;height:24px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);position:relative;cursor:pointer;flex:none;transition:background .15s,border-color .15s}
+.tg::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#7d7d85;transition:left .15s,background .15s}
+.tg.on{background:rgba(111,174,159,.25);border-color:var(--accent)}
+.tg.on::after{left:20px;background:var(--accent)}
+
+/* segmented */
+.seg{display:flex;gap:6px;width:100%}
+.opt{flex:1;text-align:center;border:1px solid var(--line);border-radius:10px;padding:9px 6px;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;background:var(--bg);transition:all .15s}
+.opt.active{border-color:var(--accent);color:var(--text);background:rgba(111,174,159,.08)}
+.rowcol{display:block;padding:14px 16px;border-top:1px solid var(--line)}
+.rowcol .k{margin-bottom:10px}
+
+/* privacy */
+.privnote{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:13px 15px;font-size:12.5px;color:var(--muted);margin:0 0 12px;display:flex;gap:9px}
+.privnote b{color:var(--text)}
+.danger{color:var(--red)!important}
+.danger-note{font-size:11.5px;color:var(--muted-2);padding:0 16px 14px}
+
+.back{text-align:center;font-size:13px;margin-top:22px}
+.back a{color:var(--accent)}
+.ver{text-align:center;color:var(--muted-2);font-size:11.5px;margin-top:8px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="head"><span class="logo">◉</span><span class="b">Cài đặt</span></div>
+
+  <!-- Plan -->
+  <div class="glabel">Gói của bạn</div>
+  <div class="plan">
+    <div class="n">Basic <span class="tier-pill">ĐANG DÙNG</span></div>
+    <div class="meta">139k/tháng · còn 9 ngày dùng thử miễn phí</div>
+    <a class="up" href="bang-gia.html">Xem các gói khác →</a>
+  </div>
+
+  <!-- Danh mục -->
+  <div class="glabel">Danh mục</div>
+  <div class="group">
+    <div class="row"><a class="full" href="onboarding.html"><div><div class="k">Mã đang theo dõi</div><div class="kd">HPG, DIG, NLG, VND, SSI, DXG, PDR</div></div><span class="sp"></span><span class="val">7 mã</span><span class="chev">›</span></a></div>
+  </div>
+
+  <!-- Cảnh báo -->
+  <div class="glabel">Cảnh báo</div>
+  <div class="group">
+    <div class="row"><div class="k">Kênh nhận</div><span class="sp"></span><span class="val">Zalo · 09xx xxx 123</span><span class="chev">›</span></div>
+    <div class="row"><div class="k">Giờ nhận buổi sáng</div><span class="sp"></span><span class="val">7:30</span><span class="chev">›</span></div>
+    <div class="row"><div><div class="k">Ngày yên vẫn nhắn</div><div class="kd">Tin gọn khi danh mục bình thường</div></div><span class="sp"></span><span class="tg on" onclick="this.classList.toggle('on')"></span></div>
+    <div class="row"><div><div class="k">Cảnh báo trong phiên</div><div class="kd">Báo ngay khi có rủi ro khẩn</div></div><span class="sp"></span><span class="lock">Silver</span><span class="tg" onclick="this.classList.toggle('on')" style="margin-left:8px"></span></div>
+    <div class="row"><div><div class="k">Báo cáo tuần qua email</div><div class="kd">Gửi sáng Thứ Hai</div></div><span class="sp"></span><span class="lock">Gold</span><span class="tg" onclick="this.classList.toggle('on')" style="margin-left:8px"></span></div>
+  </div>
+
+  <!-- Quy tắc -->
+  <div class="glabel">Quy tắc của bạn</div>
+  <div class="group">
+    <div class="rowcol">
+      <div class="k">Khi có tín hiệu <b style="color:var(--red)">THOÁT</b>, nhắc tôi giảm:</div>
+      <div class="seg" id="cut">
+        <div class="opt" data-v="50">50%</div>
+        <div class="opt active" data-v="100">Toàn bộ</div>
+        <div class="opt" data-v="self">Tôi tự quyết</div>
+      </div>
+    </div>
+    <div class="rowcol">
+      <div class="k">Khẩu vị rủi ro:</div>
+      <div class="seg" id="risk">
+        <div class="opt active" data-v="caution">Thận trọng</div>
+        <div class="opt" data-v="balance">Cân bằng</div>
+        <div class="opt" data-v="bold">Mạo hiểm</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy -->
+  <div class="glabel">Quyền riêng tư & dữ liệu</div>
+  <div class="privnote">🔒 <span>Danh mục và thông tin liên hệ của bạn được <b>mã hóa</b> và <b>không chia sẻ cho bên thứ ba</b>.</span></div>
+  <div class="group">
+    <div class="row"><a class="full" href="#"><div class="k">Tải dữ liệu của tôi</div><span class="sp"></span><span class="chev">›</span></a></div>
+    <div class="row"><a class="full" href="#"><div class="k danger">Xóa tài khoản &amp; toàn bộ dữ liệu</div><span class="sp"></span><span class="chev">›</span></a></div>
+  </div>
+  <div class="danger-note">Xóa là vĩnh viễn và không khôi phục được. Bạn có toàn quyền với dữ liệu của mình.</div>
+
+  <div class="back"><a href="radar.html">‹ Về màn hình Radar</a> · <a href="index.html">Trang giới thiệu</a></div>
+  <div class="ver">Radar danh mục · bản demo</div>
+</div>
+
+<script>
+  function segment(id){
+    document.querySelectorAll('#'+id+' .opt').forEach(function(o){
+      o.onclick=function(){
+        document.querySelectorAll('#'+id+' .opt').forEach(function(x){x.classList.remove('active');});
+        o.classList.add('active');
+      };
+    });
+  }
+  segment('cut'); segment('risk');
+</script>
+</body>
+</html>

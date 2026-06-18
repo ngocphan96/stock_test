@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — lịch sử cảnh báo</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--gray:#6a6a70;--accent:#6fae9f;
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:480px;margin:0 auto;padding:22px 16px 48px}
+
+.head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.logo{width:26px;height:26px;border-radius:50%;border:2px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:13px}
+.head .b{font-weight:600;font-size:17px}
+.lede{color:var(--muted);font-size:14px;margin:2px 0 18px}
+
+/* stat strip */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 12px;text-align:center}
+.stat .v{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.stat .v.g{color:var(--green)}
+.stat .k{font-size:11.5px;color:var(--muted);margin-top:3px}
+
+/* filter */
+.filter{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;gap:4px;margin-bottom:16px}
+.filter button{border:none;background:transparent;color:var(--muted);font-family:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer;transition:all .15s}
+.filter button.on{background:rgba(111,174,159,.14);color:var(--text)}
+
+/* entry */
+.entry{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:12px}
+.entry .top{display:flex;align-items:center;gap:10px}
+.entry .date{font-size:12px;color:var(--muted-2);width:42px;flex:none}
+.tk{font-weight:700;font-size:15.5px}
+.sp{flex:1}
+.badge{font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid;letter-spacing:.03em}
+.badge.exit{color:var(--red);border-color:rgba(240,106,111,.5);background:rgba(240,106,111,.08)}
+.badge.warn{color:var(--amber);border-color:rgba(227,168,58,.5);background:rgba(227,168,58,.08)}
+.entry .why{color:var(--muted);font-size:13px;margin:7px 0 0 52px}
+.entry .out{display:flex;align-items:center;gap:8px;margin:10px 0 0 52px;font-size:13px}
+.entry .out .res{font-weight:600}
+.res.down{color:var(--red)} .res.up{color:var(--green)} .res.flat{color:var(--muted)}
+.otag{font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:999px;border:1px solid;letter-spacing:.02em}
+.otag.good{color:var(--green);border-color:rgba(92,189,134,.5);background:rgba(92,189,134,.08)}
+.otag.part{color:var(--amber);border-color:rgba(227,168,58,.5);background:rgba(227,168,58,.08)}
+.otag.miss{color:var(--muted);border-color:var(--line);background:transparent}
+
+.honest{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px 15px;font-size:13px;color:var(--muted);margin-top:18px}
+.honest b{color:var(--text)}
+.back{text-align:center;font-size:13px;margin-top:20px}
+.back a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="head"><span class="logo">◉</span><span class="b">Lịch sử cảnh báo</span></div>
+  <p class="lede">Radar đã cảnh báo gì, và sau đó chuyện gì xảy ra — ghi lại tự động, gồm cả lần chưa đúng.</p>
+
+  <div class="stats">
+    <div class="stat"><div class="v">7</div><div class="k">cảnh báo · 90 ngày</div></div>
+    <div class="stat"><div class="v g">5/7</div><div class="k">đúng hướng</div></div>
+    <div class="stat"><div class="v g">~14%</div><div class="k">mức giảm né được (TB)</div></div>
+  </div>
+
+  <div class="filter">
+    <button class="on" onclick="flt('all',this)">Tất cả</button>
+    <button onclick="flt('good',this)">Đúng hướng</button>
+    <button onclick="flt('other',this)">Chưa đúng</button>
+  </div>
+
+  <div id="list">
+    <!-- DIG -->
+    <div class="entry" data-k="good">
+      <div class="top"><span class="date">12/05</span><span class="tk">DIG</span><span class="sp"></span><span class="badge warn">CẢNH GIÁC</span></div>
+      <div class="why">Bị đẩy tin bất thường: 12 bài, giọng hô hào.</div>
+      <div class="out"><span class="res down">−22% sau 9 phiên</span><span class="otag good">✓ đúng hướng</span></div>
+    </div>
+    <!-- HPG -->
+    <div class="entry" data-k="good">
+      <div class="top"><span class="date">28/04</span><span class="tk">HPG</span><span class="sp"></span><span class="badge exit">THOÁT</span></div>
+      <div class="why">Dòng tiền rút + chạm tín hiệu thoát.</div>
+      <div class="out"><span class="res down">−15% sau 12 phiên</span><span class="otag good">✓ đúng hướng</span></div>
+    </div>
+    <!-- GEX -->
+    <div class="entry" data-k="good">
+      <div class="top"><span class="date">02/04</span><span class="tk">GEX</span><span class="sp"></span><span class="badge exit">THOÁT</span></div>
+      <div class="why">Khối lượng phân phối + xu hướng ngắn hạn gãy.</div>
+      <div class="out"><span class="res down">−19% sau 14 phiên</span><span class="otag good">✓ đúng hướng</span></div>
+    </div>
+    <!-- VND (một phần) -->
+    <div class="entry" data-k="other">
+      <div class="top"><span class="date">21/03</span><span class="tk">VND</span><span class="sp"></span><span class="badge warn">CẢNH GIÁC</span></div>
+      <div class="why">Tin đẩy bất thường, dòng tiền chững.</div>
+      <div class="out"><span class="res flat">−5% rồi hồi lại</span><span class="otag part">~ một phần</span></div>
+    </div>
+    <!-- SSI -->
+    <div class="entry" data-k="good">
+      <div class="top"><span class="date">06/03</span><span class="tk">SSI</span><span class="sp"></span><span class="badge warn">CẢNH GIÁC</span></div>
+      <div class="why">Dòng tiền rút nhẹ + tin tiêu cực ngành.</div>
+      <div class="out"><span class="res down">−12% sau 11 phiên</span><span class="otag good">✓ đúng hướng</span></div>
+    </div>
+    <!-- DXG (sai) -->
+    <div class="entry" data-k="other">
+      <div class="top"><span class="date">19/02</span><span class="tk">DXG</span><span class="sp"></span><span class="badge exit">THOÁT</span></div>
+      <div class="why">Tín hiệu thoát ngắn hạn.</div>
+      <div class="out"><span class="res up">+4% sau 7 phiên</span><span class="otag miss">✗ sai hướng</span></div>
+    </div>
+    <!-- PDR -->
+    <div class="entry" data-k="good">
+      <div class="top"><span class="date">02/02</span><span class="tk">PDR</span><span class="sp"></span><span class="badge exit">THOÁT</span></div>
+      <div class="why">Dòng tiền rút mạnh nhiều phiên.</div>
+      <div class="out"><span class="res down">−9% sau 8 phiên</span><span class="otag good">✓ đúng hướng</span></div>
+    </div>
+  </div>
+
+  <div class="honest">
+    🔍 <b>Minh bạch:</b> mọi cảnh báo đều được ghi lại — kể cả lần sai (DXG ở trên). Radar không hứa đúng 100%; mục tiêu là <b>đúng hướng đủ thường xuyên</b> để bạn tránh được những nhịp mất tiền lớn. <span style="color:var(--muted-2)">(Số liệu trong demo là minh hoạ.)</span>
+  </div>
+
+  <div class="back"><a href="radar.html">‹ Về màn hình Radar</a></div>
+</div>
+
+<script>
+  function flt(k,btn){
+    document.querySelectorAll('.filter button').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    document.querySelectorAll('.entry').forEach(function(e){
+      var d=e.getAttribute('data-k');
+      e.style.display=(k==='all'||k===d)?'block':'none';
+    });
+  }
+</script>
+</body>
+</html>

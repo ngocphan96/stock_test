@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar danh mục — báo cáo tuần</title>
+<style>
+:root{
+  --bg:#161618;--surface:#1f1f22;--surface-2:#26262a;--line:#2e2e33;
+  --text:#ededed;--muted:#8c8c93;--muted-2:#6a6a70;
+  --red:#f06a6f;--amber:#e3a83a;--green:#5cbd86;--accent:#6fae9f;--radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);
+  font-family:'Inter',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.demo-flag{background:#222;color:var(--muted);font-size:12px;text-align:center;padding:6px 12px;border-bottom:1px solid var(--line);letter-spacing:.02em}
+.shell{max-width:520px;margin:0 auto;padding:22px 16px 48px}
+
+/* email meta */
+.mail{background:var(--surface);border:1px solid var(--line);border-radius:14px 14px 0 0;padding:16px 18px;display:flex;align-items:center;gap:12px;border-bottom:none}
+.av{width:38px;height:38px;border-radius:50%;background:#10322b;border:1.5px solid var(--accent);display:grid;place-items:center;color:var(--accent);font-size:15px;flex:none}
+.mail .from{font-weight:600;font-size:14px}
+.mail .to{font-size:12px;color:var(--muted-2);margin-top:1px}
+.mail .when{margin-left:auto;font-size:12px;color:var(--muted-2);white-space:nowrap}
+.gold{font-size:10px;font-weight:700;color:#1d1705;background:var(--amber);padding:2px 8px;border-radius:999px;margin-left:8px}
+
+/* report body */
+.rep{background:var(--surface);border:1px solid var(--line);border-radius:0 0 16px 16px;padding:4px 22px 24px}
+.subject{font-size:21px;font-weight:700;letter-spacing:-.02em;padding:14px 0 4px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.intro{font-size:14px;color:#dcdcdc;margin-bottom:20px}
+
+.slabel{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin:22px 0 12px}
+
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.stat{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.stat .v{font-size:18px;font-weight:700}
+.stat .v.amber{color:var(--amber)} .stat .v.green{color:var(--green)} .stat .v.red{color:var(--red)}
+.stat .k{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+.item{display:flex;gap:10px;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.item:first-of-type{border-top:none}
+.item .d{width:8px;height:8px;border-radius:50%;margin-top:6px;flex:none}
+.d.red{background:var(--red)}.d.amber{background:var(--amber)}.d.green{background:var(--green)}
+.item b{color:var(--text)}
+.item .sub{color:var(--muted);font-size:12.5px}
+
+.alloc{padding:3px 0}
+.alloc .a-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.alloc .a-top .w{color:var(--muted)}
+.alloc .a-top .warn{color:var(--amber);font-size:11.5px}
+.track{height:6px;background:var(--surface-2);border-radius:999px;overflow:hidden;margin-bottom:11px}
+.fill{height:100%;border-radius:999px}
+.fill.amber{background:var(--amber)}.fill.acc{background:var(--accent)}.fill.gray{background:var(--gray)}
+
+.fwd{list-style:none}
+.fwd li{display:flex;gap:9px;padding:7px 0;font-size:13.5px;color:#dcdcdc}
+.fwd li .c{color:var(--accent);flex:none;font-weight:700}
+.fwd li b{color:var(--text)}
+
+.cta{display:block;text-align:center;margin-top:22px;padding:13px;background:var(--accent);color:#10211d;font-weight:700;font-size:14.5px;border-radius:12px}
+.cta:hover{filter:brightness(1.07)}
+.disc{font-size:11.5px;color:var(--muted-2);margin-top:16px;line-height:1.5;text-align:center}
+.cadence{font-size:12px;color:var(--muted);text-align:center;margin-top:10px}
+.back{text-align:center;font-size:13px;margin-top:18px}
+.back a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo-flag">Bản demo · số liệu minh họa, không phải khuyến nghị đầu tư</div>
+
+<div class="shell">
+  <div class="mail">
+    <div class="av">◉</div>
+    <div>
+      <div class="from">Radar danh mục <span class="gold">GOLD</span></div>
+      <div class="to">tới: ban@email.com</div>
+    </div>
+    <div class="when">Thứ Hai · 7:00</div>
+  </div>
+
+  <div class="rep">
+    <div class="subject">📊 Báo cáo danh mục tuần 12–16/06</div>
+    <p class="intro">Chào bạn, tuần qua danh mục của bạn có <b>2 điểm cần chú ý</b>. Mức rủi ro tổng ở mức <b>vừa</b>, chủ yếu do tỷ trọng dồn vào BĐS dân cư — ngành đang bị rút tiền. Dưới đây là tổng hợp và vài điều nên để ý tuần tới.</p>
+
+    <div class="slabel">Sức khỏe danh mục</div>
+    <div class="stats">
+      <div class="stat"><div class="v amber">Vừa</div><div class="k">Rủi ro tổng</div></div>
+      <div class="stat"><div class="v green">5/7</div><div class="k">Mã ổn định</div></div>
+      <div class="stat"><div class="v red">2</div><div class="k">Cảnh báo trong tuần</div></div>
+      <div class="stat"><div class="v amber">Cao</div><div class="k">Mức tập trung ngành</div></div>
+    </div>
+
+    <div class="slabel">Diễn biến đáng chú ý</div>
+    <div class="item"><span class="d red"></span><div><b>HPG — THOÁT</b> (28/04): dòng tiền rút + tín hiệu thoát. <div class="sub">Sau cảnh báo: −15% trong 12 phiên.</div></div></div>
+    <div class="item"><span class="d amber"></span><div><b>DIG — CẢNH GIÁC</b> (12/05): bị đẩy tin bất thường. <div class="sub">Vẫn đang trong vùng rủi ro, theo dõi tiếp.</div></div></div>
+    <div class="item"><span class="d green"></span><div><b>5 mã còn lại</b> vận động bình thường, không có tin xấu.</div></div>
+
+    <div class="slabel">Phân bổ theo ngành</div>
+    <div class="alloc">
+      <div class="a-top"><span>BĐS dân cư</span><span class="warn">⚠ 35% · ngành đang bị rút</span></div>
+      <div class="track"><div class="fill amber" style="width:70%"></div></div>
+    </div>
+    <div class="alloc">
+      <div class="a-top"><span>Chứng khoán</span><span class="w">22%</span></div>
+      <div class="track"><div class="fill acc" style="width:44%"></div></div>
+    </div>
+    <div class="alloc">
+      <div class="a-top"><span>Thép</span><span class="w">18%</span></div>
+      <div class="track"><div class="fill acc" style="width:36%"></div></div>
+    </div>
+    <div class="alloc">
+      <div class="a-top"><span>Ngân hàng</span><span class="w">15%</span></div>
+      <div class="track"><div class="fill acc" style="width:30%"></div></div>
+    </div>
+    <div class="alloc">
+      <div class="a-top"><span>Khác</span><span class="w">10%</span></div>
+      <div class="track"><div class="fill gray" style="width:20%"></div></div>
+    </div>
+
+    <div class="slabel">Điều cần để ý tuần tới</div>
+    <ul class="fwd">
+      <li><span class="c">→</span><span>Danh mục đang <b>tập trung cao vào BĐS dân cư</b> (35%) — ngành đang bị rút tiền. Cân nhắc giảm tỷ trọng để hạ rủi ro.</span></li>
+      <li><span class="c">→</span><span><b>Ngân hàng &amp; Chứng khoán</b> đang hút dòng tiền — gợi ý để cân đối lại nếu bạn muốn tái cơ cấu.</span></li>
+      <li><span class="c">→</span><span>Tiếp tục theo dõi <b>DIG</b>: nếu thủng vùng hỗ trợ, Radar sẽ báo ngay trong phiên.</span></li>
+    </ul>
+
+    <a class="cta" href="radar.html">Mở Radar đầy đủ →</a>
+    <p class="cadence">Báo cáo gửi tự động mỗi sáng Thứ Hai · gói Gold.</p>
+    <p class="disc">Báo cáo do hệ thống tự tổng hợp từ dữ liệu, mang tính tham khảo, không phải khuyến nghị đầu tư cá nhân hóa. (Số liệu trong demo là minh hoạ.)</p>
+  </div>
+
+  <div class="back"><a href="bang-gia.html">‹ Về bảng giá</a> · <a href="radar.html">Màn hình Radar</a></div>
+</div>
+</body>
+</html>
